@@ -10,7 +10,7 @@ platform :ios do
   lane :test do
   scan(
     scheme: "Trips",
-    destination: "platform=iOS Simulator,name=iPhone 16,OS=26.2"
+    destination: "platform=iOS Simulator,name=iPhone 16,OS=26.2",
     clean: true
   )
   end
