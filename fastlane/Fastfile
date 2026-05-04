@@ -1,0 +1,29 @@
+default_platform(:ios)
+
+platform :ios do
+   lane :build do
+  gym(
+    scheme: "Trips"
+  )
+  end
+  
+  lane :test do
+  scan(
+    scheme: "Trips",
+    destination: "platform=iOS Simulator,name=iPhone 16,OS=26.2"
+    clean: true
+  )
+  end
+  
+  lane :screenshots do
+  capture_screenshots
+  end
+  
+  desc "Test GitHub secrets wiring"
+  lane :check_ci_secrets do
+    UI.user_error!("MATCH_PASSWORD is missing") if ENV["MATCH_PASSWORD"].to_s.empty?
+    UI.user_error!("FASTLANE_USER is missing") if ENV["FASTLANE_USER"].to_s.empty?
+
+    UI.success("GitHub secrets are available to Fastlane")
+  end
+end
